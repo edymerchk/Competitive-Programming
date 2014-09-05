@@ -1,9 +1,7 @@
-n = gets.chomp.to_i
+gets
 sticks = gets.split.map(&:to_i)
-q = sticks.size
-while q >= 1
-  puts q
+while sticks.size >= 1
+  puts sticks.size
   min = sticks.min
   sticks.map!{|e| e-min}.select!{|e| e>0}
-  q = sticks.size
 end
