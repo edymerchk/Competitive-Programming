@@ -14,7 +14,9 @@ def dfs(grid, i, j)
     new_x = i+DX[k]
     new_j = j+DY[k]
 
-    dfs(grid, new_x, new_j) if inside?(grid, new_x, new_j) && grid[new_x][new_j] == "1"
+    if inside?(grid, new_x, new_j) && grid[new_x][new_j] == "1"
+      dfs(grid, new_x, new_j)
+    end
   end
  # above is same as:
   # dfs(grid, i-1, j) if inside?(grid, i-1, j) && grid[i-1][j] == "1"
@@ -26,7 +28,6 @@ end
 
 def num_islands(grid)
   islands = 0
-  adj = Array.new(grid.size, [])
 
   for i in 0..grid.size-1
     for j in 0..grid[0].size-1
