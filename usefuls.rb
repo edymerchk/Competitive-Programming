@@ -73,3 +73,54 @@ end
 file = File.exist?('in.in') ? File.new('in.in','r') : STDIN
 t = file.gets.chomp.to_i
 x, y =  file.gets.chomp.split.map(&:to_i)
+
+
+# prefix sum
+a = [1, 2, 3, 4]
+a.inject([]) { |x, y| x + [(x.last || 0) + y] }
+# => [1, 3, 6, 10]
+
+
+# sort by first DESC, then second ASC
+vec = [[1,2],[1,1],[1,3],[2,1]]
+vec.sort! do |a, b|
+  a[0] == b[0] ? a[1] - b[1] : b[0] - a[0]
+end
+
+
+
+# binary search
+left = 0
+right = nums.size - 1
+while left <= right do
+    mid = (right - left) / 2 + left
+    if nums[mid] == target
+        return mid
+    elsif target > nums[mid]
+        left = mid + 1
+    else
+        right = mid - 1
+    end
+end
+left
+
+
+# ranges_overlap?
+def ranges_overlap?(r1, r2)
+  r2.begin <= r1.end && r1.begin <= r2.end
+end
+# also
+(1..30).cover?(2..3)
+#=> true
+
+
+# test_it methods
+def test_it(a,b, expected)
+  result = fn_sum(a,b)
+
+  if result == expected
+    puts "GREEN"
+  else
+    puts "RED, expected: #{expected}, found: #{result}"
+  end
+end
